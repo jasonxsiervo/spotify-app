@@ -115,6 +115,14 @@
   background: rgb(77, 77, 77);
 }
 
+.playFirst {
+  display: none;
+}
+
+.single-music:hover + .playFirst {
+  display: inline-block;
+}
+
 .play-pause {
   width: 10%;
   display: inline-block;

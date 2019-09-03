@@ -2,12 +2,12 @@
 const songs = {
     song0: {
       title: "Figure Me Out",
-      artist: "Jason Siervo",
+      artist: "Colton Ryan",
       duration: "available",
       filePath: "song0"
     },
     song1: {
-        title: "I'm Not Afraid of Anything",
+        title: "Im Not Afraid of Anything",
         artist: "Colton Ryan",
         duration: "available",
         filePath: "/songs/Im Not Afraid of Anything.mp3"
@@ -25,7 +25,7 @@ const songs = {
         filePath: "/songs/Waltz of Four Left Feet.mp3"
     },
     song4: {
-        title: "Where I'm At",
+        title: "Where Im At",
         artist: "Colton Ryan",
         duration: "available",
         filePath: "/songs/Where I'm At.mp3"

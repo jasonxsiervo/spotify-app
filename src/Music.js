@@ -7,9 +7,8 @@ class Music extends React.Component {
     artistRef = React.createRef();
     durationRef = React.createRef();
 
-    playPause = event => {
+    play = event => {
         event.preventDefault();
-        //console.log(this.props.details.duration);
         const songs = {
             play: true,
             title: this.props.details.title,
@@ -18,11 +17,6 @@ class Music extends React.Component {
             filePath: this.props.details.filePath
         }
         this.props.play(songs);
-        // const songs = {
-        //     title: this.nameRef.current.value,
-        //     artist: this.nameRef.current.value,
-        //     duration: this.nameRef.current.value
-        // };
     }
 
     render() {
@@ -31,14 +25,14 @@ class Music extends React.Component {
         return (
             <div className="single-music" key="key">
                 <div className="play-pause">
-                    <form className="play-pause" onSubmit={this.playPause}>
+                    <form className="play-pause" onSubmit={this.play}>
                         <input name="play" ref={this.playRef} required type="hidden" defaultValue={play}/>
                         <input name="title" ref={this.titleRef} required type="hidden" defaultValue={title}/>
                         <input name="artist" ref={this.artistRef} required type="hidden" defaultValue={artist}/>
                         <input name="duration" ref={this.durationRef} required type="hidden" defaultValue={duration}/>
                         <input name="duration" ref={this.pathRef} required type="hidden" defaultValue={filePath}/>
 
-                        <button type="submit">Hello</button>
+                        <button className="playFirst" type="submit">Play</button>
                     </form>      
                 </div>
                 <div className="title">

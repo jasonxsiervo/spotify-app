@@ -2,12 +2,14 @@ import React from "react";
 import './App.css';
 
 class MusicPlayer extends React.Component {
-  // componentWillMount() {
-  //   const file = require('./baseline_play_circle_outline_black_18dp.png');
-  //   console.log(file);
-  // }
+  
+  icon = event => {
+    event.preventDefault();
+    if(this.props.currentMusic.play) {
+      console.log('migraine');
+    }
 
-  // const audio1 = require('./baseline_play_circle_outline_black_18dp.png');
+  };
 
   render() {
     return (
@@ -20,7 +22,7 @@ class MusicPlayer extends React.Component {
         <div className="track-controls">
           <center>
             <button className="previousButton"></button>
-            <button onClick={() => this.setState({ player: "playing" })} className="playButton"></button>
+            <button onClick={this.playPause} className="playButton" src={this.icon}></button>
             <button className="nextButton"></button>
           </center>
         </div>

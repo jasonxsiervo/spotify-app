@@ -17,10 +17,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      play: false,
       title: {},
       songs: {},
-      playing: {}
+      play: false,
+      playing: {},
+      audio: {},
+      button: 'play',
     };    
     this.play = this.play.bind(this);    
   }
@@ -31,8 +33,7 @@ class App extends React.Component {
     const playing = { ...this.state.playing };
     playing[`music${Date.now()}`] = songs;
     await this.setState({ playing: songs });
-
-    console.log(this.state.playing);
+    console.log(this.state.play);
 
     // use audio.play()
     if(this.state.play === false){
@@ -53,16 +54,17 @@ class App extends React.Component {
       } else {
         this.url = song0;
       }
-      this.audio = new Audio(this.url);
+      let audio = new Audio(this.url);
+      this.setState({audio});
 
       // play the selected song
       this.setState({
           play: true,
         });
-      this.audio.play();
+      this.state.audio.play();
 
-    }  else if(this.state.play === true && this.state.playing) {   // if the play: true AND playing has a value...
-      this.audio.pause();   // pause the 
+    } else if(this.state.play && this.state.playing) {   // if the play: true AND playing has a value...
+      this.state.audio.pause();   // pause the 
 
       if(this.state.playing.title === "Figure Me Out"){
         this.url = song0;
@@ -79,108 +81,30 @@ class App extends React.Component {
       } else {
         this.url = song0;
       }
-      this.audio = new Audio(this.url);
+      let audio = new Audio(this.url);
+      this.setState({audio});
 
       this.setState({
           play: true,
         });
-      this.audio.play();
+      this.state.audio.play();
+      console.log('second');
+      console.log(this.state.play);
 
     } else {
         this.setState({ 
           play: false 
         });
-        this.audio.pause();
+        this.state.audio.pause();
     }
+    
   }
-
-  // playMusic = async (songs) => {
-
-  //   // Set the selected music to state: playing {}
-  //   const playing = { ...this.state.playing };
-  //   playing[`music${Date.now()}`] = songs;
-  //   await this.setState({ playing: songs });
-  //   //console.log(this.state.playing);
-
-  //   //select the music to play
-  //   const fileLocation = `.${this.state.playing.filePath}`;
-  //   // const filepath = require(`${fileLocation}`);
-  //   await this.setState({ filepath: fileLocation });
-
-  //   // //update state player
-  //   //await this.setState({ player: "playing" });
-  //   //console.log(this.audio);
-  //   //console.log(this.refs);
-  //   // this.refs.player.play();
-  //   //await this.player.play();
-
-  //   // console.log(this.document.getElementById('audioHTML'));
-  // };
-
-  // loadSampleMusic = music => {
-  //   const songs = {...this.state.music};
-  //   songs[`music${Date.now()}`] = music;
-  //   this.setState({ sampleMusic });
-  // };
-
 
   loadSampleSongs = async () => {
     await this.setState({ songs: sampleSongs });
     this.setState( {} )
-    // console.log(this.state);
-    // this.setState({ playing: sampleSongs });
-    // console.log(this.state.songs);
   };
 
-  
-
-  // togglePlay = async () => {
-  //   let kanta = new Audio(this.state.filepath);
-  //   // kanta.controls = true;
-  //   console.log(kanta);
-  //   let toggle = !this.state.play;
-  //   await this.setState({ play: true });
-  //   // await this.setState({audioTag: kanta });
-  //   console.log(this.state.audioTag);
-  //   // await kanta.play();
-    
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   //console.log(this.ref);
-  //   if(this.state.playing !== prevState.playing) {
-  //     let path;
-  //     switch (this.state.playing) {
-  //       case "Figure Me Out":
-  //         path =  this.state.filepath
-  //       break;
-  //       case "Im Not Afraid of Anything":
-  //         path =  this.state.filepath
-  //       break;
-  //       default:
-  //       break;
-  //     }
-
-  //     if(path) {
-  //       this.player.src = path;
-  //       this.player.play()
-  //       //this.setState({player: "playing"})
-  //     }
-
-  //     if (this.state.player === "paused") {
-  //       this.player.pause();
-  //     } else if (this.state.player === "stopped") {
-  //       this.player.pause();
-  //       this.player.currentTime = 0;
-  //       this.setState({ selectedTrack: null });
-  //     } else if (
-  //       this.state.player === "playing" &&
-  //       prevState.player === "paused"
-  //     ) {
-  //       this.player.play();
-  //     }
-  //   }
-  // }
 
   render() {
 
@@ -216,7 +140,7 @@ class App extends React.Component {
               </div>
 
               {Object.keys(this.state.songs).map(key =>
-                <Music key={key} details={this.state.songs[key]} play={this.play} />)}
+                <Music key={key} details={this.state.songs[key]} play={this.play} button={this.state.button}/>)}
 
           </div>
 
@@ -227,9 +151,7 @@ class App extends React.Component {
 
         <div className="music-player">
 
-          <button onClick={this.play}> {this.state.play ? 'Pause' : 'Play'} </button>
-
-          <MusicPlayer currentMusic={this.state.playing} player={this.state.player}/>
+          <MusicPlayer currentMusic={this.state.playing}/>
           
         </div>
 

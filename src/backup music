@@ -1,0 +1,62 @@
+import React from 'react';
+import './App.css';
+// import PropTypes from "prop-types";
+
+class Music extends React.Component {
+    constructor(props) {
+        super(props);
+        this.pushMusic = this.pushMusic.bind(this);
+
+        let playingRef = React.createRef();
+        let titleRef = React.createRef();
+        let artistRef = React.createRef();
+        let durationRef = React.createRef();
+        let filePathRef = React.createRef();
+    }
+    
+
+    pushMusic = (event) => {    
+        event.preventDefault();
+        console.log(this.playingRef);
+        const songs = {
+            playing: this.playingRef.value.value,
+            title: this.titleRef.value.value,
+            artist: this.artistRef.value.value,
+            duration: this.durationRef.value.value,
+            filePath: this.filePathRef.value.value
+        }
+        console.log(songs);
+        // this.props.play(songs);
+    }
+
+    render() {
+        const { title, artist, duration, filePath, playing } = this.props.details;
+
+        return (
+            <div className="single-music" key="key">
+                <div className="play-pause">
+                    <form className="play-pause" onSubmit={this.pushMusic}>
+                        <input name="title" ref={this.titleRef} required type="hidden" defaultValue={title}/>
+                        <input name="artist" ref={this.artistRef} required type="hidden" defaultValue={artist}/>
+                        <input name="duration" ref={this.durationRef} required type="hidden" defaultValue={duration}/>
+                        <input name="filePath" ref={this.filePathRef} required type="hidden" defaultValue={filePath}/>
+                        <input name="playing" ref={this.playingRef} required type="hidden" defaultValue={playing}/>
+
+                        <button type="submit">Hello</button>
+                    </form>      
+                </div>
+                <div className="title">
+                    <p> {title} </p>
+                </div>
+                <div className="artist">
+                    <p> {artist} </p>
+                </div>
+                <div className="duration">
+                    <p> {duration} </p>
+                </div>
+            </div>
+          );
+    }
+}
+
+export default Music;
