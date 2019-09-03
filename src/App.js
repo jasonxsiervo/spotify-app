@@ -20,43 +20,72 @@ class App extends React.Component {
       play: false,
       title: {},
       songs: {},
-      playing: {},
-      filepath: {},
-      audioTag: ''
+      playing: {}
     };    
-
-    this.play = this.play.bind(this);
-    
-    
+    this.play = this.play.bind(this);    
   }
 
   play = async (songs) => {
 
-    // 1.) load the song here using await
-
-    // 2.) check if the correct song is loaded
-
-    // 3.) use audio.play()
-
-    
-    console.log(this.state.playing.title);
-    if(this.state.playing.title === "Figure Me Out"){
-      this.url = song0;
-    } else {
-      this.url = song2;
-    }
-    console.log(this.state.playing.title);
-    this.audio = new Audio(this.url);
-
+    // load the song here using await
     const playing = { ...this.state.playing };
     playing[`music${Date.now()}`] = songs;
     await this.setState({ playing: songs });
-   
+
+    console.log(this.state.playing);
+
+    // use audio.play()
     if(this.state.play === false){
+
+      // determine which song is selected
+      if(this.state.playing.title === "Figure Me Out"){
+        this.url = song0;
+      } else if(this.state.playing.title === "Im Not Afraid of Anything") {
+        this.url = song1;
+      } else if(this.state.playing.title === "Piano Church") {
+        this.url = song2;
+      } else if(this.state.playing.title === "Waltz of Four Left Feet") {
+        this.url = song3;
+      } else if(this.state.playing.title === "Where Im At") {
+        this.url = song4;
+      } else if(this.state.playing.title === "You Make My Dreams") {
+        this.url = song5;
+      } else {
+        this.url = song0;
+      }
+      this.audio = new Audio(this.url);
+
+      // play the selected song
       this.setState({
           play: true,
         });
       this.audio.play();
+
+    }  else if(this.state.play === true && this.state.playing) {   // if the play: true AND playing has a value...
+      this.audio.pause();   // pause the 
+
+      if(this.state.playing.title === "Figure Me Out"){
+        this.url = song0;
+      } else if(this.state.playing.title === "Im Not Afraid of Anything") {
+        this.url = song1;
+      } else if(this.state.playing.title === "Piano Church") {
+        this.url = song2;
+      } else if(this.state.playing.title === "Waltz of Four Left Feet") {
+        this.url = song3;
+      } else if(this.state.playing.title === "Where Im At") {
+        this.url = song4;
+      } else if(this.state.playing.title === "You Make My Dreams") {
+        this.url = song5;
+      } else {
+        this.url = song0;
+      }
+      this.audio = new Audio(this.url);
+
+      this.setState({
+          play: true,
+        });
+      this.audio.play();
+
     } else {
         this.setState({ 
           play: false 
@@ -186,7 +215,8 @@ class App extends React.Component {
 
               </div>
 
-              {Object.keys(this.state.songs).map(key =><Music key={key} details={this.state.songs[key]} play={this.play} />)}
+              {Object.keys(this.state.songs).map(key =>
+                <Music key={key} details={this.state.songs[key]} play={this.play} />)}
 
           </div>
 
