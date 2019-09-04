@@ -10,15 +10,23 @@ class Music extends React.Component {
     durationRef = React.createRef();
 
     play = event => {
-        event.preventDefault();
         const songs = {
-            play: true,
             title: this.props.details.title,
             artist: this.props.details.artist,
             duration: this.props.details.duration,
             filePath: this.props.details.filePath
         }
-        this.props.play(songs);
+        this.props.play(event, songs);
+    }
+
+    pause = (event) => {
+        const songs = {
+            title: this.props.details.title,
+            artist: this.props.details.artist,
+            duration: this.props.details.duration,
+            filePath: this.props.details.filePath
+        }
+        this.props.pause(event, songs);
     }
 
     render() {
@@ -27,7 +35,8 @@ class Music extends React.Component {
         return (
             <div className="single-music" key="key">
                 <div className="play-pause">
-                    <form className="play-pause" onSubmit={this.play}>
+
+                        <form className="play-pause" onSubmit={ !this.props.isPlaying ? this.play : this.pause }>
 
                         <input name="play" ref={this.playRef} required type="hidden" defaultValue={play}/>
                         <input name="title" ref={this.titleRef} required type="hidden" defaultValue={title}/>
@@ -36,7 +45,7 @@ class Music extends React.Component {
                         <input name="duration" ref={this.pathRef} required type="hidden" defaultValue={filePath}/>
 
                         <button className="playFirst" type="submit"><img src={playButton} className="play-first" alt="play icon"/></button>
-                        <img src={playingIcon} className="playing-icon" />
+                        {/* <img src={playingIcon} className="playing-icon" /> */}
                         
                     </form>      
                 </div>
