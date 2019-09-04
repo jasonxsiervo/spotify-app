@@ -28,7 +28,7 @@ class MusicPlayer extends React.Component {
         </div>
 
         <div className="track-volume">
-        <p>{this.props.currentMusic.duration}</p>
+        {/* <p>{this.props.currentMusic.duration}</p> */}
         </div>
       </div>
     );

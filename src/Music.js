@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import playButton from './baseline_play_circle_outline_black_18dp.png';
+import playingIcon from './baseline_volume_up_black_18dp.png';
 // import PropTypes from "prop-types";
 
 class Music extends React.Component {
@@ -20,19 +22,22 @@ class Music extends React.Component {
     }
 
     render() {
-        const { title, artist, duration, filePath,  songNumber, play } = this.props.details;
+        const { title, artist, duration, filePath, play } = this.props.details;
 
         return (
             <div className="single-music" key="key">
                 <div className="play-pause">
                     <form className="play-pause" onSubmit={this.play}>
+
                         <input name="play" ref={this.playRef} required type="hidden" defaultValue={play}/>
                         <input name="title" ref={this.titleRef} required type="hidden" defaultValue={title}/>
                         <input name="artist" ref={this.artistRef} required type="hidden" defaultValue={artist}/>
                         <input name="duration" ref={this.durationRef} required type="hidden" defaultValue={duration}/>
                         <input name="duration" ref={this.pathRef} required type="hidden" defaultValue={filePath}/>
 
-                        <button className="playFirst" type="submit">Play</button>
+                        <button className="playFirst" type="submit"><img src={playButton} className="play-first" alt="play icon"/></button>
+                        <img src={playingIcon} className="playing-icon" />
+                        
                     </form>      
                 </div>
                 <div className="title">
