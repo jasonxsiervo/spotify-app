@@ -30,7 +30,7 @@ class Music extends React.Component {
     }
 
     render() {
-        const { title, artist, duration, filePath, play } = this.props.details;
+        const { title, artist, duration, filePath} = this.props.details;
 
         return (
             <div className="single-music" key="key">
@@ -38,16 +38,20 @@ class Music extends React.Component {
 
                         <form className="play-pause" onSubmit={ !this.props.isPlaying ? this.play : this.pause }>
 
-                        <input name="play" ref={this.playRef} required type="hidden" defaultValue={play}/>
-                        <input name="title" ref={this.titleRef} required type="hidden" defaultValue={title}/>
-                        <input name="artist" ref={this.artistRef} required type="hidden" defaultValue={artist}/>
-                        <input name="duration" ref={this.durationRef} required type="hidden" defaultValue={duration}/>
-                        <input name="duration" ref={this.pathRef} required type="hidden" defaultValue={filePath}/>
+                            <input name="title" ref={this.titleRef} required type="hidden" defaultValue={title}/>
+                            <input name="artist" ref={this.artistRef} required type="hidden" defaultValue={artist}/>
+                            <input name="duration" ref={this.durationRef} required type="hidden" defaultValue={duration}/>
+                            <input name="duration" ref={this.pathRef} required type="hidden" defaultValue={filePath}/>
 
-                        <button className="playFirst" type="submit"><img src={playButton} className="play-first" alt="play icon"/></button>
-                        {/* <img src={playingIcon} className="playing-icon" /> */}
+                            <button className="playFirst" type="submit">
+                                <img 
+                                    src={this.props.isPlaying && this.props.songDetail.title === this.props.details.title? playingIcon : playButton} 
+                                    className={this.props.isPlaying && this.props.songDetail.title === this.props.details.title? 'playing' : 'play-first'} 
+                                    alt="play icon"/>
+                            </button>
+                            {/* <img src={playingIcon} className="playing-icon" /> */}
                         
-                    </form>      
+                        </form>      
                 </div>
                 <div className="title">
                     <p> {title} </p>

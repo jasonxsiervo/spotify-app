@@ -113,6 +113,14 @@
   display: inline-block;
 }
 
+.play-first:hover { 
+  transform: scale(1.1); 
+}
+
+.single-music:hover .play-first {
+  opacity: 1;
+}
+
 .single-music:hover {
   background: rgb(77, 77, 77);
 }
@@ -133,12 +141,22 @@
   transition: .2s ease-in-out;
 }
 
-.play-first:hover { 
-  transform: scale(1.1); 
+.playing {
+  position: fixed;
+  margin-top: -21px;
+  opacity: 1; 
+  transition: .2s ease-in-out;
 }
 
-.single-music:hover .play-first {
-  opacity: 1;
+.playing:hover {
+  position: fixed;
+  margin-top: -21px;
+  opacity: 0; 
+  transition: .2s ease-in-out;
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  /* background-image: url(./baseline_pause_circle_outline_black_18dp.png);  */
 }
 
 .play-pause {

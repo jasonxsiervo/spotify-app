@@ -99,7 +99,8 @@ class App extends React.Component {
               </div>
 
               {Object.keys(this.state.songs).map(key =>
-                <Music key={key} details={this.state.songs[key]} play={this.play} pause={this.pause} button={this.state.button} isPlaying={this.state.isPlaying}/>)}
+                <Music key={key} details={this.state.songs[key]} play={this.play} pause={this.pause} button={this.state.button} 
+                isPlaying={this.state.isPlaying}  songDetail={this.state.songDetail}/>)}
 
           </div>
 
@@ -110,7 +111,8 @@ class App extends React.Component {
 
         <div className="music-player">
 
-          <MusicPlayer currentMusic={this.state.playing}/>
+          <MusicPlayer play={this.play} pause={this.pause} songDetail={this.state.songDetail} 
+            isPlaying={this.state.isPlaying} />
           
         </div>
 
